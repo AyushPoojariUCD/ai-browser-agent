@@ -5,8 +5,8 @@ const MessageInput = () => {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
 
-  // Only destructuring sendMessage (no sendMcpMessage)
-  const { sendMessage, loading, conversations, mcpEnabled } = useChat();
+  const { sendMessage, sendMcpMessage, loading, conversations, mcpEnabled } =
+    useChat();
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -14,8 +14,7 @@ const MessageInput = () => {
 
   const handleSend = () => {
     if (!input.trim() || loading || conversations.length === 0) return;
-    // sendMessage internally checks mcpEnabled
-    sendMessage(input);
+    mcpEnabled ? sendMcpMessage(input) : sendMessage(input);
     setInput("");
   };
 

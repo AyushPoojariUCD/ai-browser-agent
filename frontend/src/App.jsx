@@ -28,17 +28,34 @@ const ProtectedRoute = ({ children }) => {
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 
+const RedirectHomeIfAuthenticated = ({ children }) => {
+  const { isAuthenticated, authLoading } = useAuth();
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-white">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  return isAuthenticated ? <Navigate to="/chat" replace /> : children;
+};
+
 const App = () => {
   return (
     <Router>
-      {" "}
-      {/* ✅ Router wraps EVERYTHING */}
       <AuthProvider>
-        {" "}
-        {/* ✅ useNavigate() is now safe here */}
         <ChatProvider>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={
+                <RedirectHomeIfAuthenticated>
+                  <Home />
+                </RedirectHomeIfAuthenticated>
+              }
+            />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route

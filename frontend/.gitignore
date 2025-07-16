@@ -11,10 +11,7 @@ build/
 
 # Vite / React
 .vite/
-.env.local
-.env.development
-.env.production
-.env*
+
 
 # Firebase (local emulators, security)
 firebase-debug.log

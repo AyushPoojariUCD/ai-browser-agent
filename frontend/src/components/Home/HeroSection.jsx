@@ -1,7 +1,7 @@
 // src/components/HeroSection.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import LightningCanvas from "../Three/LightningCanvas";
+import LightningCanvas from "../Animation/LightningCanvas";
 
 const HeroSection = () => {
   return (

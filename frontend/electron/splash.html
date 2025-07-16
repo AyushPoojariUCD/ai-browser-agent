@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Launching AI Browser Agent</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        img {
+            width: 200px;
+            animation: pulse 1.4s ease-in-out infinite;
+            filter: drop-shadow(0 0 12px orange);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.75;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.07);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./assets/splash.gif" alt="Loading..." />
+</body>
+
+</html>

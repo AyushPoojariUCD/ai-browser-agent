@@ -1,5 +1,5 @@
 {
-  "name": "chat-app",
+  "name": "ai-browser-agent",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -56,7 +56,7 @@
     "@vitejs/plugin-react": "^4.4.1",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
-    "cypress": "^14.4.1",
+    "cypress": "^14.5.0",
     "electron": "^36.4.0",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
