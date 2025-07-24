@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   FileEdit,
   Edit,
   Trash,
   LogOut,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
 import { useChat } from "../../contexts/ChatContext";
 import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
-import axios from "axios";
 
 const Sidebar = ({ closeSidebar }) => {
   const { logout } = useFirebaseAuth();
@@ -24,40 +21,12 @@ const Sidebar = ({ closeSidebar }) => {
     setModelType,
     temperature,
     setTemperature,
-    mcpEnabled,
-    toggleMCP,
+    automationEnabled,
+    toggleAutomation,
   } = useChat();
 
   const [editingIndex, setEditingIndex] = useState(null);
   const [tempTitle, setTempTitle] = useState("");
-  const [showDevSettings, setShowDevSettings] = useState(false);
-  const [configContent, setConfigContent] = useState("{}");
-  const [saveStatus, setSaveStatus] = useState("");
-
-  useEffect(() => {
-    const loadConfig = async () => {
-      try {
-        const res = await axios.get("/api/mcp/config");
-        const content = Object.keys(res.data).length ? res.data : {};
-        setConfigContent(JSON.stringify(content, null, 2));
-      } catch (err) {
-        setConfigContent("{}");
-        console.error("Failed to load mcp_config.json:", err);
-      }
-    };
-    loadConfig();
-  }, []);
-
-  const handleSaveConfig = async () => {
-    try {
-      const parsed = JSON.parse(configContent);
-      await axios.post("/api/mcp/config", parsed);
-      setSaveStatus("✅ Saved successfully");
-      setTimeout(() => setSaveStatus(""), 2000);
-    } catch {
-      setSaveStatus("❌ Failed to save: Invalid JSON or server error");
-    }
-  };
 
   return (
     <aside className="w-64 bg-[#1f1f3a] p-4 border-r border-gray-700 flex flex-col justify-between">
@@ -75,9 +44,9 @@ const Sidebar = ({ closeSidebar }) => {
 
         <h4 className="text-lg font-semibold flex items-center gap-1 mb-4">
           <span className="animate-flicker text-orange-500 drop-shadow text-2xl">
-            ⚡
+            <span className="text-[#FFD700] animate-pulse drop-shadow-[0_0_8px_#FFD700]">⌬</span>
           </span>
-          <span className="bg-gradient-to-r from-orange-500 to-purple-500 text-transparent bg-clip-text animate-pulse text-base">
+          <span className="text-[#FFD700] animate-pulse drop-shadow-[0_0_8px_#FFD700]">
             AI-Browser-Agent
           </span>
         </h4>
@@ -141,7 +110,7 @@ const Sidebar = ({ closeSidebar }) => {
           ))}
         </div>
 
-        {/* 🔧 MCP toggle, agent & temperature settings */}
+        {/* ⚙️ Model & automation settings */}
         <div className="pt-4 border-t border-gray-600 mt-4 space-y-2">
           <div>
             <label className="text-sm text-gray-300">LLM Provider</label>
@@ -150,50 +119,21 @@ const Sidebar = ({ closeSidebar }) => {
               onChange={(e) => setModelType(e.target.value)}
               className="w-full p-1 rounded bg-[#2b2b45] text-white text-sm"
             >
-              {/* OpenAI */}
               <option value="gpt-4o">GPT-4o (OpenAI)</option>
               <option value="gpt-4">GPT-4 (OpenAI)</option>
               <option value="gpt-3.5-turbo">GPT-3.5 Turbo (OpenAI)</option>
-
-              {/* Anthropic */}
-              <option value="claude-3-sonnet-20240229">
-                Claude 3 Sonnet (Anthropic)
-              </option>
-              <option value="claude-3-haiku-20240307">
-                Claude 3 Haiku (Anthropic)
-              </option>
-              <option value="claude-3-opus-20240229">
-                Claude 3 Opus (Anthropic)
-              </option>
-
-              {/* Mistral (via official SDK) */}
-              <option value="mistral-small-latest">
-                Mistral Small (Mistral AI)
-              </option>
-              <option value="mistral-medium-latest">
-                Mistral Medium (Mistral AI)
-              </option>
-              <option value="mistral-large-latest">
-                Mistral Large (Mistral AI)
-              </option>
-
-              {/* Meta LLaMA (via Together API or Groq) */}
+              <option value="claude-3-sonnet-20240229">Claude 3 Sonnet</option>
+              <option value="claude-3-haiku-20240307">Claude 3 Haiku</option>
+              <option value="claude-3-opus-20240229">Claude 3 Opus</option>
+              <option value="mistral-small-latest">Mistral Small</option>
+              <option value="mistral-medium-latest">Mistral Medium</option>
+              <option value="mistral-large-latest">Mistral Large</option>
               <option value="llama3-8b-8192">LLaMA 3 (8B)</option>
               <option value="llama3-70b-8192">LLaMA 3 (70B)</option>
-
-              {/* Google Gemini */}
-              <option value="gemini-1.5-pro-latest">
-                Gemini 1.5 Pro (Google)
-              </option>
-
-              {/* Cohere (Command R models) */}
-              <option value="command-r">Command R (Cohere)</option>
-              <option value="command-r-plus">Command R+ (Cohere)</option>
-
-              {/* Groq (Mixtral) */}
+              <option value="gemini-1.5-pro-latest">Gemini 1.5 Pro</option>
+              <option value="command-r">Command R</option>
+              <option value="command-r-plus">Command R+</option>
               <option value="mixtral-8x7b-32768">Mixtral (Groq)</option>
-
-              {/* Perplexity (if supported through LLM router) */}
               <option value="perplexity">Perplexity</option>
             </select>
           </div>
@@ -213,80 +153,20 @@ const Sidebar = ({ closeSidebar }) => {
           </div>
 
           <div className="mt-4 flex items-center justify-between text-sm text-gray-300">
-            <label htmlFor="mcp-toggle">Enable MCP Tools</label>
+            <label htmlFor="automation-toggle">Automation Enabled</label>
             <button
-              id="mcp-toggle"
-              onClick={toggleMCP}
-              aria-pressed={mcpEnabled}
+              id="automation-toggle"
+              onClick={toggleAutomation}
+              aria-pressed={automationEnabled}
               className={`px-3 py-1 rounded text-white text-xs font-semibold transition-colors ${
-                mcpEnabled
+                automationEnabled
                   ? "bg-green-600 hover:bg-green-700"
                   : "bg-gray-600 hover:bg-gray-500"
               }`}
             >
-              {mcpEnabled ? "Enabled" : "Disabled"}
+              {automationEnabled ? "Enabled" : "Disabled"}
             </button>
           </div>
-        </div>
-
-        {/* 🛠️ Developer Settings */}
-        <div className="pt-4 border-t border-gray-600 mt-4">
-          <button
-            onClick={() => setShowDevSettings(!showDevSettings)}
-            className="text-sm text-gray-300 flex items-center justify-between w-full"
-          >
-            Developer Settings
-            {showDevSettings ? (
-              <ChevronUp className="w-4 h-4" />
-            ) : (
-              <ChevronDown className="w-4 h-4" />
-            )}
-          </button>
-
-          {showDevSettings && (
-            <div className="mt-2 space-y-2">
-              <textarea
-                rows={10}
-                className="w-full p-2 text-sm bg-[#2b2b45] text-white rounded font-mono resize-y"
-                value={configContent}
-                onChange={(e) => setConfigContent(e.target.value)}
-              />
-              <div className="flex gap-2">
-                <button
-                  onClick={async () => {
-                    try {
-                      const res = await axios.get("/api/mcp/config");
-                      setConfigContent(JSON.stringify(res.data, null, 2));
-                      setSaveStatus("✅ Reloaded");
-                      setTimeout(() => setSaveStatus(""), 1500);
-                    } catch {
-                      setSaveStatus("❌ Reload failed");
-                    }
-                  }}
-                  className="bg-gray-700 hover:bg-gray-600 text-white py-1 px-3 text-sm rounded"
-                >
-                  Reload
-                </button>
-                <button
-                  onClick={handleSaveConfig}
-                  className="bg-orange-600 hover:bg-orange-700 text-white py-1 px-3 text-sm rounded"
-                >
-                  Save mcp_config.json
-                </button>
-              </div>
-              {saveStatus && (
-                <p
-                  className={`text-xs ${
-                    saveStatus.includes("❌")
-                      ? "text-red-400"
-                      : "text-green-400"
-                  }`}
-                >
-                  {saveStatus}
-                </p>
-              )}
-            </div>
-          )}
         </div>
       </div>
 

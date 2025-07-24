@@ -16,7 +16,7 @@ function createWindow() {
     alwaysOnTop: true,
     center: true,
     resizable: false,
-    icon: path.join(__dirname, "assets", "icon.ico"),
+    icon: path.join(__dirname, "assets", "icon-rounded.png"),
     webPreferences: {
       contextIsolation: true,
     },
@@ -32,7 +32,7 @@ function createWindow() {
     minHeight: 600,
     show: false,
     frame: true,
-    icon: path.join(__dirname, "assets", "icon.ico"),
+    icon: path.join(__dirname, "assets", "icon-rounded.png"),
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
