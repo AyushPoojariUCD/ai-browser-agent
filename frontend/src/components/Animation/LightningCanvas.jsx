@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Sparkles, OrbitControls } from "@react-three/drei";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
