@@ -4,8 +4,6 @@ import { Sparkles, OrbitControls } from "@react-three/drei";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 const LightningCanvas = () => {
-  const [goal, setGoal] = useState("");
-
   const [text] = useTypewriter({
     words: ['“Go to Spotify and play Ed Sheeran”'],
     loop: false,
