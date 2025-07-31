@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 import Footer from '../../src/components/Footer';
 
 describe('Footer Component', () => {

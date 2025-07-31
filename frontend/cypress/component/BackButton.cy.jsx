@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
 import BackButton from "../../src/components/BackButton";
