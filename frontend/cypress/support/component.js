@@ -1,5 +1,5 @@
 // cypress/support/component.js
-
+/// <reference types="cypress" />
 // Import custom commands
 import './commands'
 
