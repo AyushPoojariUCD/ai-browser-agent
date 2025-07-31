@@ -46,3 +46,8 @@ Thumbs.db
 *.tsbuildinfo
 out/
 *.asar
+
+/dist-electron/
+/release/
+/app-release/
+
