@@ -1,0 +1,41 @@
+name: Run Cypress Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start application (if needed)
+        run: npm start &
+        env:
+          CI: true
+
+      - name: Wait for app to be ready
+        uses: jakejarvis/wait-action@v0.1.1
+        with:
+          url: 'http://localhost:3000'
+          timeout: 60
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm start
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 60
