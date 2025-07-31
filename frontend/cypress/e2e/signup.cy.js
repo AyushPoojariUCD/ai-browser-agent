@@ -1,3 +1,5 @@
+/* eslint-env cypress */
+
 describe("Signup Flow", () => {
   const today = new Date();
   const dateString = `${today.getFullYear()}${(today.getMonth() + 1)
