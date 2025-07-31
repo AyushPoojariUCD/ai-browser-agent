@@ -17,27 +17,29 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20 # You need Node 20 for Vite + latest packages
 
       - name: Install dependencies
         run: npm install
         working-directory: ./frontend
 
-      - name: Start application
-        run: npm start &
+      - name: Build app for preview
+        run: npm run build
         working-directory: ./frontend
-        env:
-          CI: true
+
+      - name: Start Vite preview server
+        run: npm run preview -- --port 5173 &
+        working-directory: ./frontend
 
       - name: Wait for app to be ready
         uses: jakejarvis/wait-action@v0.1.1
         with:
-          url: 'http://localhost:3000'
-          timeout: 60
+          url: 'http://localhost:5173'
+          timeout: 90
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
           working-directory: ./frontend
-          wait-on: 'http://localhost:3000'
-          wait-on-timeout: 60
+          wait-on: 'http://localhost:5173'
+          wait-on-timeout: 90
