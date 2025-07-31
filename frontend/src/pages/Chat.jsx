@@ -1,7 +1,6 @@
 // src/pages/ChatPage.jsx
 import React, { useState } from "react";
 import Sidebar from "../components/Chat/Sidebar";
-import ChatHeader from "../components/Chat/ChatHeader";
 import MessageList from "../components/Chat/MessageList";
 import MessageInput from "../components/Chat/MessageInput";
 import { Menu } from "lucide-react";

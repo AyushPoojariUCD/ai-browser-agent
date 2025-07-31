@@ -1,3 +1,4 @@
+// eslint-disable-next-line react/no-unknown-property
 import { Canvas } from "@react-three/fiber";
 import { Sparkles, OrbitControls } from "@react-three/drei";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
