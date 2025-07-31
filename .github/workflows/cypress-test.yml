@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Start application (if needed)
+      - name: Start application
         run: npm start &
         env:
           CI: true
@@ -36,6 +36,5 @@ jobs:
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          start: npm start
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
