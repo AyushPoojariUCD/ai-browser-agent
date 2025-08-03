@@ -1,0 +1,45 @@
+name: Run Cypress Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # You need Node 20 for Vite + latest packages
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend
+
+      - name: Build app for preview
+        run: npm run build
+        working-directory: ./frontend
+
+      - name: Start Vite preview server
+        run: npm run preview -- --port 5173 &
+        working-directory: ./frontend
+
+      - name: Wait for app to be ready
+        uses: jakejarvis/wait-action@v0.1.1
+        with:
+          url: 'http://localhost:5173'
+          timeout: 90
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: ./frontend
+          wait-on: 'http://localhost:5173'
+          wait-on-timeout: 90

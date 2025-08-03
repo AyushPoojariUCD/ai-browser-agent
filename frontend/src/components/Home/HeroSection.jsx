@@ -1,11 +1,11 @@
 // src/components/HeroSection.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import LightningCanvas from "../Three/LightningCanvas";
+import LightningCanvas from "../Animation/LightningCanvas"; 
 
 const HeroSection = () => {
   return (
-    <section className="flex flex-col-reverse lg:flex-row items-center justify-between gap-10">
+    <section className="flex flex-col-reverse lg:flex-row items-center justify-between gap-10 mt-12">
       <div className="w-full lg:w-1/2 text-center lg:text-left">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
           Flexible AI browser automation <br />
@@ -27,7 +27,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Lightning animation canvas */}
+      {/* 3D Globe animation canvas */}
       <div className="w-full lg:w-1/2 h-[300px] sm:h-[400px] md:h-[500px]">
         <LightningCanvas />
       </div>

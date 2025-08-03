@@ -1,12 +1,12 @@
-# AI Browser Agent with Python MCP
+# AI Browser Agent with Python Backend
 
-This project is an AI-powered browser automation agent enhanced with a Python-based Model Context Protocol (MCP) for managing tasks, workflows, and system configurations.
+This project is an AI-powered browser automation agent leveraging the package called Browse Use for managing tasks, workflows, and complete automation.
 
 ## Project Structure
 ``` 
 ai-browser-agent/
 
-├── main.py
+├── server.py
 ├── .python-version
 ├── uv.lock
 ├── .gitignore
@@ -30,4 +30,4 @@ uv venv
  uv sync 
 
 # Run Server
- uv run main.py
+ uv run server.py

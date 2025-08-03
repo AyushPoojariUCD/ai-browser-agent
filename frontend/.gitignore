@@ -11,10 +11,7 @@ build/
 
 # Vite / React
 .vite/
-.env.local
-.env.development
-.env.production
-.env*
+
 
 # Firebase (local emulators, security)
 firebase-debug.log
@@ -49,3 +46,8 @@ Thumbs.db
 *.tsbuildinfo
 out/
 *.asar
+
+/dist-electron/
+/release/
+/app-release/
+

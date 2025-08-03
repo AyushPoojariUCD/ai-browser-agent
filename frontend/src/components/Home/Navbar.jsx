@@ -1,70 +1,100 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Quickstart", href: "/" },
+];
+
 const Navbar = () => {
+  const [isSticky, setIsSticky] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleMenu = () => setMenuOpen((prev) => !prev);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="w-full mb-12 bg-[#12121e] text-white shadow-md">
-      <nav className="flex items-center justify-between py-4 px-4 sm:px-6 md:px-10">
-        <h1 className="text-3xl font-bold flex items-center gap-2">
-          <span className="animate-flicker text-orange-500 drop-shadow-[0_0_8px_#f97316] text-4xl">
-            ⚡
-          </span>
-          <span className="bg-gradient-to-r from-orange-500 to-purple-500 text-transparent bg-clip-text text-transparent animate-pulse">
-            AI-Browser-Agent
-          </span>
-        </h1>
-
-        {/* Desktop Nav */}
-        <div className="hidden sm:flex gap-4 items-center">
-          <Link
-            to="/login"
-            className="text-sm hover:text-orange-400 transition duration-200"
-          >
-            Sign In
-          </Link>
-          <Link
-            to="/signup"
-            className="bg-orange-500 px-4 py-2 rounded font-medium text-sm hover:bg-orange-600 transition duration-200"
-          >
-            Get Started
-          </Link>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={toggleMenu}
-          className="sm:hidden text-white focus:outline-none text-2xl"
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 w-screen text-white transition-all duration-300 ${
+        isSticky
+        ? "bg-[#1a132bcc] backdrop-blur-md shadow-md"
+        : "bg-[#1a132b]"
+          }`}
         >
-          {menuOpen ? "✖" : "☰"}
-        </button>
-      </nav>
 
-      {/* Mobile Nav */}
-      {menuOpen && (
-        <div className="sm:hidden flex flex-col gap-3 px-4 pb-4 animate-slide-down">
-          <Link
-            to="/login"
-            className="text-sm hover:text-orange-400 transition"
-            onClick={() => setMenuOpen(false)}
+        <div className="max-w-7xl mx-auto px-4 py-4 md:py-5 flex items-center justify-between">
+          {/* Logo */}
+          <a href="/" className="flex items-center text-white font-bold text-4xl">
+            <span className="text-[#FFD700] animate-pulse drop-shadow-[0_0_8px_#FFD700]">⌬</span>
+            <span className="ml-2 tracking-tight">AI Browser Agent</span>
+          </a>
+
+          {/* Desktop Nav */}
+          <nav
+            role="navigation"
+            aria-label="Main navigation"
+            className="hidden md:flex items-center gap-8"
           >
-            Sign In
-          </Link>
-          <Link
-            to="/signup"
-            className="bg-orange-500 px-4 py-2 rounded font-medium text-sm hover:bg-orange-600 transition"
-            onClick={() => setMenuOpen(false)}
+            <ul className="flex items-center gap-6">
+              {navLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-white/80 hover:text-white transition font-medium"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <Link
+                to="/signup"
+                className="ml-6 rounded-full bg-gradient-to-r from-orange-500 to-pink-500 hover:brightness-110 transition px-5 py-2 text-sm font-semibold shadow-lg"
+            >
+              Try Demo
+            </Link>
+          </nav>
+
+          {/* Mobile Hamburger */}
+          <button
+            className="md:hidden text-white text-2xl focus:outline-none"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
           >
-            Get Started
-          </Link>
+            {menuOpen ? "✖" : "☰"}
+          </button>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="md:hidden flex flex-col gap-3 px-4 pb-4 animate-slide-down">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-white/80 hover:text-white transition font-medium"
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href="/demo"
+              className="rounded-full bg-gradient-to-r from-orange-500 to-pink-500 hover:brightness-110 transition px-5 py-2 text-sm font-semibold shadow-md mt-2"
+            >
+              Try Demo
+            </a>
+          </div>
+        )}
+      </header>
+    </>
   );
 };
 

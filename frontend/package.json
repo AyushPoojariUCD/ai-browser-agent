@@ -1,5 +1,5 @@
 {
-  "name": "chat-app",
+  "name": "ai-browser-agent",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -17,8 +17,8 @@
     "start": "electron electron/main.mjs"
   },
   "dependencies": {
-    "@react-three/drei": "^10.1.2",
-    "@react-three/fiber": "^9.1.2",
+    "@react-three/drei": "^10.6.0",
+    "@react-three/fiber": "^9.2.0",
     "@tailwindcss/vite": "^4.1.8",
     "axios": "^1.9.0",
     "dotenv": "^16.5.0",
@@ -37,6 +37,7 @@
     "react-icons": "^5.5.0",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.6.2",
+    "react-simple-typewriter": "^5.0.1",
     "rehype-highlight": "^7.0.2",
     "rehype-katex": "^7.0.1",
     "rehype-raw": "^7.0.0",
@@ -47,7 +48,7 @@
     "zustand": "^5.0.5"
   },
   "devDependencies": {
-    "@eslint/js": "^9.25.0",
+    "@eslint/js": "^9.32.0",
     "@tailwindcss/postcss": "^4.1.8",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -56,12 +57,14 @@
     "@vitejs/plugin-react": "^4.4.1",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
-    "cypress": "^14.4.1",
+    "cypress": "^14.5.3",
     "electron": "^36.4.0",
-    "eslint": "^9.25.0",
+    "eslint": "^9.32.0",
+    "eslint-plugin-cypress": "^5.1.0",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^16.0.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
     "jsdom": "^26.1.0",
     "postcss": "^8.5.4",
     "tailwindcss": "^4.1.8",

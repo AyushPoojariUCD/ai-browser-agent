@@ -1,7 +1,13 @@
 [project]
-name = "mcp backend"
+name = "backend"
 version = "0.1.0"
-description = "MCP based Backend that powers automation for AI browser agent"
+description = "Backend"
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = []
+requires-python = ">=3.12"
+
+dependencies = [
+    "fastapi",
+    "pydantic",
+    "browser-use",
+    "openai"
+]

@@ -1,5 +1,3 @@
-// src/hooks/useFirebaseAuth.js
-
 import { useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
@@ -7,12 +5,14 @@ import {
   signInWithPopup,
   signOut,
   GoogleAuthProvider,
+  GithubAuthProvider,
 } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../firebase/config";
 import toast from "react-hot-toast";
 
 const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 export const useFirebaseAuth = () => {
   const navigate = useNavigate();
@@ -49,6 +49,19 @@ export const useFirebaseAuth = () => {
     try {
       await signInWithPopup(auth, googleProvider);
       toast.success("Signed in with Google!");
+      navigate("/chat");
+    } catch (error) {
+      toast.error(parseFirebaseError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signInWithGitHub = async () => {
+    setLoading(true);
+    try {
+      await signInWithPopup(auth, githubProvider);
+      toast.success("Signed in with GitHub!");
       navigate("/chat");
     } catch (error) {
       toast.error(parseFirebaseError(error));
@@ -98,6 +111,7 @@ export const useFirebaseAuth = () => {
     loginWithEmail,
     signupWithEmail,
     signInWithGoogle,
+    signInWithGitHub,
     logout,
     loading,
   };

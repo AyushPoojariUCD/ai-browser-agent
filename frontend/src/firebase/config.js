@@ -1,16 +1,16 @@
-// src/firebase/confijs.js
+// Firebase config
+// src/firebase/config.js
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
-// Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyBizqRNYz0FuecKG786iV0j82u3_oFzcJQ",
-  authDomain: "ai-browser-agent-bfbbb.firebaseapp.com",
-  projectId: "ai-browser-agent-bfbbb",
-  storageBucket: "ai-browser-agent-bfbbb.appspot.com", // FIXED .app → .app**spot**
-  messagingSenderId: "849951203739",
-  appId: "1:849951203739:web:4a9470ffd1469f9b55013e",
-  measurementId: "G-65DXNMVB31",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

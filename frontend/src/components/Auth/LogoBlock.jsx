@@ -1,4 +1,4 @@
-import logo from "../../assets/lightning.png";
+import logo from "../../assets/icon-rounded.png";
 
 const LogoBlock = () => (
   <div className="hidden md:block w-1/2 text-center">
