@@ -16,16 +16,16 @@ export const ChatProvider = ({ children }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [mcpEnabled, setMcpEnabled] = useState(false);
   const [modelType, setModelType] = useState("gpt-4o");
   const [temperature, setTemperature] = useState(0.7);
   const [toolServers] = useState([]);
-
-  const toggleMCP = () => setMcpEnabled((prev) => !prev);
+  const [automationEnabled, setAutomationEnabled] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("conversations", JSON.stringify(conversations));
   }, [conversations]);
+
+  const toggleAutomation = () => setAutomationEnabled((prev) => !prev);
 
   const addMessage = (type, content) => {
     if (!conversations[currentIndex]) return;
@@ -52,33 +52,39 @@ export const ChatProvider = ({ children }) => {
         : { role: "assistant", content: msg.content }
     );
 
-  const sendMessage = async (userInput) => {
-    if (!conversations.length || !conversations[currentIndex]) {
-      setConversations([{ title: "Chat 1", messages: [] }]);
-      setCurrentIndex(0);
-      return;
-    }
+const sendMessage = async (userInput) => {
+  if (!conversations.length || !conversations[currentIndex]) {
+    setConversations([{ title: "Chat 1", messages: [] }]);
+    setCurrentIndex(0);
+    return;
+  }
 
-    const currentMessages = conversations[currentIndex]?.messages || [];
-    addMessage("user", userInput);
-    setLoading(true);
+  const currentMessages = conversations[currentIndex]?.messages || [];
+  addMessage("user", userInput);
+  setLoading(true);
 
-    try {
-      const payload = {
-        messages: [
-          ...getOpenAIMessages(currentMessages),
-          { role: "user", content: userInput },
-        ],
-        modelType,
-        temperature,
-        tools: [],
-      };
+  try {
+    const endpoint = automationEnabled
+      ? "http://localhost:8000/api/agent"
+      : "http://localhost:8000/api/chat";
 
-      const endpoint = mcpEnabled
-        ? "http://localhost:8000/api/mcp"
-        : "http://localhost:8000/api/chat";
+    const payload = automationEnabled
+      ? { prompt: userInput } // ✅ simplified for automation
+      : {
+          messages: [
+            ...getOpenAIMessages(currentMessages),
+            { role: "user", content: userInput },
+          ],
+          modelType,
+          temperature,
+          tools: [],
+        };
 
-      const response = await axios.post(endpoint, payload);
+    const response = await axios.post(endpoint, payload);
+
+    if (automationEnabled) {
+      addMessage("ai", `🤖 Automation completed: ${response.data.task}`);
+    } else {
       addMessage("ai", response.data.reply);
 
       if (response.data.tools_output) {
@@ -86,13 +92,14 @@ export const ChatProvider = ({ children }) => {
           addMessage("ai", `🔧 ${name}:\n${output}`);
         });
       }
-    } catch (err) {
-      console.error("API error:", err);
-      addMessage("ai", "❌ Failed to get response.");
-    } finally {
-      setLoading(false);
     }
-  };
+  } catch (err) {
+    console.error("API error:", err);
+    addMessage("ai", "❌ Failed to get response.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const newChat = () => {
     const title = `Chat ${conversations.length + 1}`;
@@ -127,20 +134,19 @@ export const ChatProvider = ({ children }) => {
         conversations,
         currentMessages: conversations[currentIndex]?.messages || [],
         sendMessage,
-        sendMcpMessage: sendMessage,
         newChat,
         switchChat,
         currentIndex,
         renameChat,
         deleteChat,
         loading,
-        mcpEnabled,
-        toggleMCP,
         modelType,
         setModelType,
         temperature,
         setTemperature,
         toolServers,
+        automationEnabled,
+        toggleAutomation,
       }}
     >
       {children}
