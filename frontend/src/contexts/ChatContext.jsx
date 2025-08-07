@@ -45,13 +45,6 @@ export const ChatProvider = ({ children }) => {
     });
   };
 
-  const getOpenAIMessages = (messages) =>
-    messages.map((msg) =>
-      msg.type === "user"
-        ? { role: "user", content: msg.content }
-        : { role: "assistant", content: msg.content }
-    );
-
 const sendMessage = async (userInput) => {
   if (!conversations.length || !conversations[currentIndex]) {
     setConversations([{ title: "Chat 1", messages: [] }]);
@@ -69,16 +62,8 @@ const sendMessage = async (userInput) => {
       : "http://localhost:8000/api/chat";
 
     const payload = automationEnabled
-      ? { prompt: userInput } // ✅ simplified for automation
-      : {
-          messages: [
-            ...getOpenAIMessages(currentMessages),
-            { role: "user", content: userInput },
-          ],
-          modelType,
-          temperature,
-          tools: [],
-        };
+      ? { prompt: userInput }
+      : { prompt: userInput  };
 
     const response = await axios.post(endpoint, payload);
 
