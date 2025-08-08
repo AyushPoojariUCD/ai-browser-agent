@@ -6,7 +6,7 @@ A privacy-preserving AI assistant that automates tasks like ticket booking, form
 
 The AI Browser Agent is a locally run desktop application designed to help users automate complex web-based tasks through natural language commands. Unlike cloud-based assistants, it executes all actions directly on the user's device, ensuring that sensitive information such as passwords, personal data, and browsing activity never leave the local environment.
 
-By integrating large language models (LLMs) with browser automation frameworks like Selenium, the agent can understand user intents, analyze the content of multiple open browser tabs, and perform multi-step tasks autonomously. The use of Microsoft’s Semantic Kernel adds an extra layer of controlled, secure execution for each automation step.
+By integrating large language models (LLMs) with browser automation frameworks like Selenium, the agent can understand user intents, analyze the content of multiple open browser tabs, and perform multi-step tasks autonomously. The use of Microsoft’s Semantic Kernel adds an extra layer of controlled, secure execution for each automation steps.
 
 
 ## Features
