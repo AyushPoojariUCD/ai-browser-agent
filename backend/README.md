@@ -1,11 +1,30 @@
 # AI Browser Agent with Python Backend
 
-This project is an AI-powered browser automation agent leveraging the package called Browse Use for managing tasks, workflows, and complete automation.
+This project is an **AI-powered browser automation agent** leveraging the [`browser-use`](https://github.com/browser-use/browser-use) package for managing tasks, workflows, and complete automation.  
+It can navigate websites, interact with elements, and perform tasks automatically based on natural language prompts.
 
-## Project Structure
-``` 
-ai-browser-agent/
+---
 
+## 📂 Project Structure
+```plaintext
+ai-browser-agent/backend
+├── .cursor
+├── bin/
+│   └── (scripts or CLI utilities)
+│
+├── llm/
+│   ├── __init__.py
+│   ├── llm_automation.py
+│   └── llm_chat.py
+│
+├── schemas/
+│   ├── __init__.py
+│   └── chat.py
+│
+├── utils/
+│   ├── __init__.py
+│   └── check_api_key.py
+|
 ├── server.py
 ├── .python-version
 ├── uv.lock
@@ -13,21 +32,52 @@ ai-browser-agent/
 ├── pyproject.toml
 └── README.md
 ``` 
-## Installation
 
+--- 
+
+## 🖇️Installation
+
+#### Clone the repository
 ```bash
-# Clone the repo
 git clone https://github.com/AyushPoojariUCD/ai-browser-agent/
 cd ai-browser-agent
+```
 
-# Set up a virtual environment
+#### Set up a virtual environment
+```
 uv venv
+```
 
-# or for Unix/macOS:
-# source .venv/bin/activate
 
-# Install dependencies
+#### Install dependencies
  uv sync 
 
-# Run Server
- uv run server.py
+#### Run Server
+```
+uvicorn server:app --host 0.0.0.0 --port 8000
+```
+
+---
+
+## 🚀 API Endpoints
+Once the server is running, you can:
+
+Access the API at: http://localhost:8000
+
+Use /api/chat for chat-based LLM queries.
+
+Use /api/agent for automated browser tasks.
+
+---
+
+## 🛠️ Tech Stack
+Backend Framework: Python, FastAPI, Browse Use
+
+LLM Providers: OpenAI, Google Gemini, DeepSeek, Groq, Anthropic, AWS Bedrock, Ollama
+
+Automation Engine: browser-use
+
+Package Manager: uv
+
+---
+

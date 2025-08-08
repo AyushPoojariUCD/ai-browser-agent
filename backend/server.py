@@ -1,44 +1,34 @@
-# main.py
-# uvicorn server:app --host 0.0.0.0 --port 8000
+# server.py
+# Run with: uvicorn server:app --host 0.0.0.0 --port 8000
 import os
-from openai import OpenAI
 from dotenv import load_dotenv
 
 from browser_use import Agent
-from browser_use.llm.openai.chat import ChatOpenAI
+from llm.llm_chat import chat_completion
+from llm.llm_automation import get_llm_instance
 
-from pydantic import BaseModel
-from typing import Optional, Dict
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
+from fastapi import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from schemas.chat import PromptRequest, ChatRequest, ChatResponse
+
+from utils.check_api_key import check_required_api_key
+
 
 load_dotenv()
-
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 app = FastAPI()
 
 # Allow frontend to connect
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# === Schemas ===
-class PromptRequest(BaseModel):
-    prompt: str
-
-class ChatRequest(BaseModel):
-    prompt: str
-
-class ChatResponse(BaseModel):
-    reply: str
-    tools_output: Optional[Dict[str, str]] = None
-
-# Home
+# === Routes ===
 @app.get("/")
 def root():
     return {"message": "🚀 Backend is Running!"}
@@ -47,20 +37,20 @@ def root():
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat_route(data: ChatRequest):
     try:
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[{"role": "user", "content": data.prompt}],
-            temperature=0.7,
-        )
-        reply = response.choices[0].message.content
-        return {"reply": reply, "tools_output": None}
+        print(data.provider,data.prompt)
+        reply = chat_completion(data.provider, data.prompt, data.temperature)
+        return {"reply": reply}
     except Exception as e:
         return {"reply": f"❌ LLM error: {str(e)}", "tools_output": None}
     
 # Automation
 @app.post("/api/agent")
 async def agent_endpoint(req: PromptRequest):
-    llm = ChatOpenAI(model="gpt-4.1-mini")
+    print(req)
+    if not check_required_api_key(req.provider):
+        raise HTTPException(status_code=400, detail=f"Missing API key(s) for {req.provider}")
+    llm = get_llm_instance(req.provider, req.temperature)
+    print(llm)
     agent = Agent(task=req.prompt, llm=llm)
     await agent.run()
     return {"status": "done", "task": req.prompt}

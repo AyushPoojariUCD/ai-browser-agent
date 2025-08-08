@@ -1,13 +1,17 @@
 [project]
 name = "backend"
 version = "0.1.0"
-description = "Backend"
+description = "Backend for multi-LLM ai-browser agent that powers browser automation and chat completion"
 readme = "README.md"
 requires-python = ">=3.12"
 
 dependencies = [
     "fastapi",
+    "requests"
     "pydantic",
     "browser-use",
+    "python-dotenv",
     "openai"
+    "google-generativeai",
+    "anthropic",
 ]

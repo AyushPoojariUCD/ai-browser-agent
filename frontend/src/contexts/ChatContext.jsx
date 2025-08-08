@@ -16,9 +16,8 @@ export const ChatProvider = ({ children }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [modelType, setModelType] = useState("gpt-4o");
+  const [provider, setProvider] = useState("openai");
   const [temperature, setTemperature] = useState(0.7);
-  const [toolServers] = useState([]);
   const [automationEnabled, setAutomationEnabled] = useState(false);
 
   useEffect(() => {
@@ -45,46 +44,49 @@ export const ChatProvider = ({ children }) => {
     });
   };
 
-const sendMessage = async (userInput) => {
-  if (!conversations.length || !conversations[currentIndex]) {
-    setConversations([{ title: "Chat 1", messages: [] }]);
-    setCurrentIndex(0);
-    return;
-  }
-
-  const currentMessages = conversations[currentIndex]?.messages || [];
-  addMessage("user", userInput);
-  setLoading(true);
-
-  try {
-    const endpoint = automationEnabled
-      ? "http://localhost:8000/api/agent"
-      : "http://localhost:8000/api/chat";
-
-    const payload = automationEnabled
-      ? { prompt: userInput }
-      : { prompt: userInput  };
-
-    const response = await axios.post(endpoint, payload);
-
-    if (automationEnabled) {
-      addMessage("ai", `🤖 Automation completed: ${response.data.task}`);
-    } else {
-      addMessage("ai", response.data.reply);
-
-      if (response.data.tools_output) {
-        Object.entries(response.data.tools_output).forEach(([name, output]) => {
-          addMessage("ai", `🔧 ${name}:\n${output}`);
-        });
-      }
+  const sendMessage = async (userInput) => {
+    if (!conversations.length || !conversations[currentIndex]) {
+      setConversations([{ title: "Chat 1", messages: [] }]);
+      setCurrentIndex(0);
+      return;
     }
-  } catch (err) {
-    console.error("API error:", err);
-    addMessage("ai", "❌ Failed to get response.");
-  } finally {
-    setLoading(false);
-  }
-};
+
+    addMessage("user", userInput);
+    setLoading(true);
+
+    try {
+      const endpoint = automationEnabled
+        ? "http://localhost:8000/api/agent"
+        : "http://localhost:8000/api/chat";
+
+      const payload = {
+        prompt: userInput,
+        provider,
+        temperature,
+      };
+
+      const response = await axios.post(endpoint, payload);
+
+      if (automationEnabled) {
+        addMessage("ai", `🤖 Automation completed: ${response.data.task}`);
+      } else {
+        addMessage("ai", response.data.reply);
+
+        if (response.data.tools_output) {
+          Object.entries(response.data.tools_output).forEach(([name, output]) => {
+            addMessage("ai", `🔧 ${name}:\n${output}`);
+          });
+        }
+      }
+    } catch (err) {
+      console.error("API error:", err);
+      const errorMsg =
+        err?.response?.data?.detail || "❌ Failed to get response: (Check API Key)";
+      addMessage("ai", `⚠️ ${errorMsg}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const newChat = () => {
     const title = `Chat ${conversations.length + 1}`;
@@ -125,11 +127,10 @@ const sendMessage = async (userInput) => {
         renameChat,
         deleteChat,
         loading,
-        modelType,
-        setModelType,
+        provider,
+        setProvider,
         temperature,
         setTemperature,
-        toolServers,
         automationEnabled,
         toggleAutomation,
       }}
