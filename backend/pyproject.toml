@@ -11,7 +11,7 @@ dependencies = [
     "pydantic",
     "browser-use",
     "python-dotenv",
-    "openai"
+    "openai",
     "google-generativeai",
     "anthropic",
 ]
