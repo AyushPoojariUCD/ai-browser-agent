@@ -7,7 +7,7 @@ requires-python = ">=3.12"
 
 dependencies = [
     "fastapi",
-    "requests"
+    "requests",
     "pydantic",
     "browser-use",
     "python-dotenv",
