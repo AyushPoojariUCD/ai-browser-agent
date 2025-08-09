@@ -32,13 +32,6 @@ describe("Signup Page", () => {
     cy.get("input[type='password']").type(password);
     cy.get("button[type='submit']").click();
 
-    // After successful signup, app might redirect to /chat or /login
-    // Adjust assertions to match your app's behavior
-    cy.url({ timeout: 15000 }).should((url) => {
-      expect(url).to.match(/\/chat|\/login/);
-    });
-
-    // Optional: Check if some element confirming signup exists
-    // Example: cy.contains("Welcome").should("exist");
+    cy.url({ timeout: 15000 }).should('match', /\/chat|\/login/);
   });
 });
