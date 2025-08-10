@@ -1,0 +1,12 @@
+2025/08/09-11:57:21.105 4dcaef Reusing MANIFEST /Users/deepakshelke/Desktop/ai-browser-agent-main/python_agent/.browseruse-config/profiles/default/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/08/09-11:57:21.105 4dcaef Recovering log #16
+2025/08/09-11:57:21.110 4dcaef Reusing old log /Users/deepakshelke/Desktop/ai-browser-agent-main/python_agent/.browseruse-config/profiles/default/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/000016.log 
+2025/08/09-11:57:21.702 4dcaf1 Level-0 table #22: started
+2025/08/09-11:57:21.711 4dcaf1 Level-0 table #22: 1658201 bytes OK
+2025/08/09-11:57:21.714 4dcaf1 Delete type=0 #16
+2025/08/09-11:57:22.157 4dcaf1 Compacting 1@1 + 1@2 files
+2025/08/09-11:57:22.160 4dcaf1 Generated table #23@1: 338 keys, 81382 bytes
+2025/08/09-11:57:22.160 4dcaf1 Compacted 1@1 + 1@2 files => 81382 bytes
+2025/08/09-11:57:22.161 4dcaf1 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/08/09-11:57:22.161 4dcaf1 Delete type=2 #22
+2025/08/09-11:57:22.161 4dcaf1 Delete type=2 #19
