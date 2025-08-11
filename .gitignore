@@ -1,0 +1,63 @@
+# Environment files (root + frontend + backend)
+.env
+.env*
+frontend/.env
+frontend/.env.*
+backend/.env
+backend/.env.*
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+
+# Build output
+dist/
+build/
+.esbuild/
+
+# Vite / React
+.vite/
+
+# Firebase (local emulators, security)
+firebase-debug.log
+.firebaserc
+.firebase/
+
+# Cypress
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+
+# Testing
+coverage/
+*.lcov
+
+# IDE/editor configs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Electron
+*.tsbuildinfo
+out/
+*.asar
+/dist-electron/
+/release/
+/app-release/
+
+# Temp folders
+tmp/
+temp/
