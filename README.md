@@ -1,12 +1,12 @@
 # AI Browser Agent
 
-A privacy-preserving AI assistant that automates tasks like ticket booking, form filling, and web scraping directly in your local browser using LLMs, Selenium and Electron.
+A privacy-preserving AI assistant that automates tasks like ticket booking, form filling, and web scraping directly in your local browser using LLMs, Browser-Use and Electron.
 
 ## Overview
 
 The AI Browser Agent is a locally run desktop application designed to help users automate complex web-based tasks through natural language commands. Unlike cloud-based assistants, it executes all actions directly on the user's device, ensuring that sensitive information such as passwords, personal data, and browsing activity never leave the local environment.
 
-By integrating large language models (LLMs) with browser automation frameworks like Selenium, the agent can understand user intents, analyze the content of multiple open browser tabs, and perform multi-step tasks autonomously. The use of Microsoft’s Semantic Kernel adds an extra layer of controlled, secure execution for each automation steps.
+By integrating large language models (LLMs) with browser automation frameworks like Browser-use, the agent can understand user intents, analyze the content of multiple open browser tabs, and perform multi-step tasks autonomously. The use of Microsoft’s Semantic Kernel adds an extra layer of controlled, secure execution for each automation steps.
 
 
 ## Features
@@ -14,10 +14,8 @@ By integrating large language models (LLMs) with browser automation frameworks l
 - Chat interface for conversational task instructions
 - End-to-end local execution; no data sent to cloud servers
 - Automated task execution across browser tabs
-- Browser content analysis using Puppeteer or Selenium
 - Workflow planning using large language models (LLMs)
-- Semantic Kernel integration for structured and secure task execution
-- Built with React, Electron, Express, Firebase, and Selenium
+- Built with React, Electron, Express, Firebase, Python and Node
 
 ---
 
@@ -81,10 +79,8 @@ This use case showcases the AI’s capability in **e-commerce automation**, maki
 |----------------------|-------------------------------------------------|
 | UI                   | React, Electron, Tailwind CSS                   |
 | Backend              | Python, Express (Node.js), Firebase Admin SDK   |
-| Browser Automation   | Selenium                                        |
-| Task Execution       | Microsoft Semantic Kernel                       |
+| Browser Automation   | Browser-use                                     |
 | Planning             | OpenAI GPT / Claude Anthorpic                   |
-| Deployment           | Docker, Kubernetes, Azure Cloud (App Service)   |
 
 ---
 
@@ -92,31 +88,146 @@ This use case showcases the AI’s capability in **e-commerce automation**, maki
 
 ```
 ai-browser-agent/
-│
-├── backend/                                    # Backend
-│ ├── routes/
-│ ├── config/
-│ └── index.js
-│
-├── frontend/                                   # Fronted: React + Electron
-│ ├── public/
-│ ├── src/
-│ │ ├── components/
-│ │ ├── pages/
-│ │ ├── contexts/
-│ │ └── App.jsx
-│
-├── electron/                                   # Electron entry point
-│ └── main.mjs
-│
-├── k8s/                                        # Kubernetes manifests
-│ ├── frontend-deployment.yaml
-│ ├── backend-deployment.yaml
-│
-├── Dockerfile # Base Dockerfile for backend
-├── Dockerfile.frontend                         # Dockerfile for frontend
-├── .env                                        # Environment variables
-└── README.md
+├── backend-node
+│   ├── agentExecutor.js
+│   ├── intentParser.js
+│   ├── llmActionPlanner.js
+│   ├── llmAnswerAgent.js
+│   ├── mcp.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── parser.js
+│   ├── routes
+│   │   └── commandRoutes.js
+│   ├── server.js
+│   └── siteHandlers
+│       ├── amazon.js
+│       └── tesco.js
+├── backend-python
+│   ├── __pycache__
+│   │   └── server.cpython-313.pyc
+│   ├── llm
+│   │   └── __pycache__
+│   │       ├── __init__.cpython-313.pyc
+│   │       ├── llm_automation.cpython-313.pyc
+│   │       └── llm_chat.cpython-313.pyc
+│   ├── schemas
+│   │   └── __pycache__
+│   │       ├── __init__.cpython-313.pyc
+│   │       └── chat.cpython-313.pyc
+│   └── utils
+│       └── __pycache__
+│           ├── __init__.cpython-313.pyc
+│           └── check_api_key.cpython-313.pyc
+├── docs
+│   ├── llm-integration-decision.pdf
+│   ├── project-workflow.png
+│   ├── use-case-flight-booking.jpg
+│   └── use-case-grocery-ordering.jpg
+├── examples
+│   ├── working-example-0.png
+│   ├── working-example-1.png
+│   ├── working-example-2.png
+│   ├── working-example-3.png
+│   └── working-example-4.png
+├── frontend
+│   ├── cypress
+│   │   ├── component
+│   │   │   ├── BackButton.cy.jsx
+│   │   │   └── Footer.cy.jsx
+│   │   ├── e2e
+│   │   │   ├── auth_login.cy.js
+│   │   │   ├── auth_signup.cy.js
+│   │   │   ├── chatpage.cy.js
+│   │   │   ├── home.cy.js
+│   │   │   ├── loginpage.cy.js
+│   │   │   └── signuppage.cy.js
+│   │   ├── fixtures
+│   │   │   └── example.json
+│   │   └── support
+│   │       ├── commands.js
+│   │       ├── component-index.html
+│   │       ├── component.js
+│   │       └── e2e.js
+│   ├── cypress.config.js
+│   ├── electron
+│   │   ├── assets
+│   │   │   ├── icon-rounded.png
+│   │   │   ├── icon-transparent.png
+│   │   │   └── icon.png
+│   │   ├── main.mjs
+│   │   ├── preload.js
+│   │   └── splash.html
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   └── favicon-32x32.png
+│   ├── src
+│   │   ├── App.jsx
+│   │   ├── assets
+│   │   │   ├── feature-1.png
+│   │   │   ├── feature-2.png
+│   │   │   ├── feature-3.png
+│   │   │   ├── feature-4.png
+│   │   │   └── icon-rounded.png
+│   │   ├── components
+│   │   │   ├── Animation
+│   │   │   │   └── LightningCanvas.jsx
+│   │   │   ├── Auth
+│   │   │   │   ├── AuthContainer.jsx
+│   │   │   │   ├── LoginForm.jsx
+│   │   │   │   ├── LogoBlock.jsx
+│   │   │   │   ├── SignupForm.jsx
+│   │   │   │   ├── SocialLogin.jsx
+│   │   │   │   └── SocialSignup.jsx
+│   │   │   ├── BackButton.jsx
+│   │   │   ├── Chat
+│   │   │   │   ├── MessageBubble.jsx
+│   │   │   │   ├── MessageInput.jsx
+│   │   │   │   ├── MessageList.jsx
+│   │   │   │   └── Sidebar.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   └── Home
+│   │   │       ├── DemoPreview.jsx
+│   │   │       ├── FeatureCards.jsx
+│   │   │       ├── HeroSection.jsx
+│   │   │       ├── HeroSectionCustomerReview.jsx
+│   │   │       ├── IntegrationGrid.jsx
+│   │   │       └── Navbar.jsx
+│   │   ├── contexts
+│   │   │   ├── AuthContext.jsx
+│   │   │   └── ChatContext.jsx
+│   │   ├── firebase
+│   │   │   └── config.js
+│   │   ├── hooks
+│   │   │   └── useFirebaseAuth.js
+│   │   ├── index.css
+│   │   ├── main.jsx
+│   │   ├── pages
+│   │   │   ├── Chat.jsx
+│   │   │   ├── Home.jsx
+│   │   │   ├── Login.jsx
+│   │   │   └── Signup.jsx
+│   │   └── store
+│   │       └── useUserStore.js
+│   ├── tailwind.config.js
+│   ├── vite.config.js
+│   └── vitest.setup.js
+├── LICENSE
+├── minutes_of_meeting
+│   └── minutes_of_meeting.xlsx
+├── python_agent
+│   ├── __pycache__
+│   │   ├── python_agent.cpython-312.pyc
+│   │   └── python_agent.cpython-313.pyc
+│   ├── python_agent.py
+│   └── requirements.txt
+├── README.md
+├── SCRUM_LINKS.md
+└── sprints
+    └── sprints.md
 
 ```
 
@@ -151,6 +262,12 @@ npm install electron
 npm run electron-dev
 
 npm run electron
+```
+
+**Steps to run Backend : `AI Browser Agent`**
+```
+uvicorn server:app --host 0.0.0.0 --port 8000
+
 ```
 
 ---
