@@ -1,0 +1,30 @@
+2025/08/11-05:50:47.993 547b24 Reusing MANIFEST /Users/deepakshelke/Desktop/ai-browser-agent/backend/python_agent/.browseruse-config/profiles/default/Default/Local Extension Settings/hgocgmmkeekgimogcfnjbfdgngocendk/MANIFEST-000001
+2025/08/11-05:50:47.993 547b24 Recovering log #6
+2025/08/11-05:50:47.996 547b24 Reusing old log /Users/deepakshelke/Desktop/ai-browser-agent/backend/python_agent/.browseruse-config/profiles/default/Default/Local Extension Settings/hgocgmmkeekgimogcfnjbfdgngocendk/000006.log 
+2025/08/11-05:50:48.777 547b26 Level-0 table #10: started
+2025/08/11-05:50:48.782 547b26 Level-0 table #10: 4321734 bytes OK
+2025/08/11-05:50:48.783 547b26 Delete type=0 #6
+2025/08/11-05:52:07.440 547b26 Level-0 table #12: started
+2025/08/11-05:52:07.446 547b26 Level-0 table #12: 4380971 bytes OK
+2025/08/11-05:52:07.448 547b26 Delete type=0 #9
+2025/08/11-05:52:08.417 547b26 Level-0 table #14: started
+2025/08/11-05:52:08.431 547b26 Level-0 table #14: 6500850 bytes OK
+2025/08/11-05:52:08.433 547b26 Delete type=0 #11
+2025/08/11-05:52:15.799 547b26 Level-0 table #16: started
+2025/08/11-05:52:15.813 547b26 Level-0 table #16: 4898118 bytes OK
+2025/08/11-05:52:15.816 547b26 Delete type=0 #13
+2025/08/11-05:52:15.816 547b26 Compacting 4@0 + 1@1 files
+2025/08/11-05:52:15.824 547b26 Generated table #17@0: 4 keys, 2506845 bytes
+2025/08/11-05:52:15.833 547b26 Generated table #18@0: 8 keys, 3076228 bytes
+2025/08/11-05:52:15.838 547b26 Generated table #19@0: 11 keys, 2106241 bytes
+2025/08/11-05:52:15.839 547b26 Generated table #20@0: 2 keys, 171883 bytes
+2025/08/11-05:52:15.839 547b26 Compacted 4@0 + 1@1 files => 7861197 bytes
+2025/08/11-05:52:15.841 547b26 compacted to: files[ 0 4 1 0 0 0 0 ]
+2025/08/11-05:52:15.841 547b26 Delete type=2 #14
+2025/08/11-05:52:15.841 547b26 Delete type=2 #16
+2025/08/11-05:52:15.841 547b26 Delete type=2 #7
+2025/08/11-05:52:15.841 547b26 Delete type=2 #12
+2025/08/11-05:52:15.841 547b26 Delete type=2 #10
+2025/08/11-05:53:13.235 547b24 Level-0 table #22: started
+2025/08/11-05:53:13.264 547b24 Level-0 table #22: 7093709 bytes OK
+2025/08/11-05:53:13.265 547b24 Delete type=0 #15

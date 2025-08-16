@@ -1,0 +1,13 @@
+2025/08/11-05:36:09.535 544b4e Reusing MANIFEST /Users/deepakshelke/Desktop/ai-browser-agent/backend-node/python_agent/.browseruse-config/profiles/default/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/08/11-05:36:09.535 544b4e Recovering log #58
+2025/08/11-05:36:09.536 544b4e Reusing old log /Users/deepakshelke/Desktop/ai-browser-agent/backend-node/python_agent/.browseruse-config/profiles/default/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/000058.log 
+2025/08/11-05:36:09.568 544b4c Level-0 table #63: started
+2025/08/11-05:36:09.569 544b4c Level-0 table #63: 59883 bytes OK
+2025/08/11-05:36:09.570 544b4c Delete type=0 #58
+2025/08/11-05:36:09.570 544b4c Manual compaction at level-0 from '\x00\x18\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x19\x00\x00\x00' @ 0 : 0; will stop at '\x00\x19\x00\x00\xc8\x11\x00L\x00o\x00g\x00s\x00R\x00e\x00q\x00u\x00e\x00s\x00t\x00s\x00S\x00t\x00o\x00r\x00e' @ 11784 : 1
+2025/08/11-05:36:09.570 544b4c Compacting 1@0 + 1@1 files
+2025/08/11-05:36:09.572 544b4c Generated table #64@0: 1182 keys, 14447 bytes
+2025/08/11-05:36:09.572 544b4c Compacted 1@0 + 1@1 files => 14447 bytes
+2025/08/11-05:36:09.572 544b4c compacted to: files[ 0 1 1 0 0 0 0 ]
+2025/08/11-05:36:09.572 544b4c Delete type=2 #63
+2025/08/11-05:36:09.573 544b4c Manual compaction at level-0 from '\x00\x19\x00\x00\xc8\x11\x00L\x00o\x00g\x00s\x00R\x00e\x00q\x00u\x00e\x00s\x00t\x00s\x00S\x00t\x00o\x00r\x00e' @ 11784 : 1 .. '\x00\x19\x00\x00\x00' @ 0 : 0; will stop at (end)
