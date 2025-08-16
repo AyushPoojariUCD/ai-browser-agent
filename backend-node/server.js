@@ -1,50 +1,32 @@
-<<<<<<< HEAD
 // server.js
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
-const commandRoutes = require('./routes/commandRoutes');
-
-dotenv.config();
-const app = express();
-const PORT = process.env.PORT || 3001;
-
-app.use(cors());
-app.use(express.json()); // ensure this is present
-app.use('/api/command', require('./routes/commandRoutes'));
-
-
-app.listen(PORT, () => {
-  console.log(`✅ MCP Server running at http://localhost:${PORT}`);
-=======
-// backend/server.js
-
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
+const path = require("path");
 
-const mcpRouter = require("./mcp");
+require("dotenv").config({ path: path.resolve(__dirname, ".env") });
+
+const agentRouter = require("./agentRouter");
 
 const app = express();
 
-// 1. Enable CORS for your front-end (adjust origin as needed)
 app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET","POST","OPTIONS"],
-  allowedHeaders: ["Content-Type","Authorization"],
+  origin: process.env.FRONTEND_ORIGIN || true, // allow any if not set
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 }));
 
-// 2. Parse JSON bodies
-app.use(express.json());
+// ❌ remove this: app.options("*", cors());
 
-// 3. Mount the MCP router at /agent
-app.use("/agent", mcpRouter);
+app.use(express.json({ limit: "2mb" }));
 
-// 4. Start the server
-const PORT = process.env.PORT || 5001;
+app.get("/", (_req, res) => {
+  res.json({ ok: true, service: "node-backend", ts: new Date().toISOString() });
+});
+
+app.use("/agent", agentRouter);
+
+const PORT = Number(process.env.PORT || 5001);
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
->>>>>>> c2c21c7 (Backend code updated.)
 });

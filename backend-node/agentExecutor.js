@@ -1,22 +1,24 @@
 // backend/agentExecutor.js
 const axios = require("axios");
 
-exports.runAgentTask = async ({ url, action, item }) => {
+// Accept { prompt } and pass straight to Python.
+exports.runAgentTask = async ({ prompt }) => {
   try {
-    const prompt = `Open ${url} and ${action} ${item}`.trim();
+    if (typeof prompt !== "string" || !prompt.trim()) {
+      throw new Error("Prompt must be a non-empty string");
+    }
+
     const resp = await axios.post(
       "http://localhost:8000/api/agent",
-      { prompt },
+      { prompt: prompt.trim() },
       { timeout: 180000 }
     );
 
-    // Python returns { status, detail }, normalize to { result }
-    const msg =
-      resp.data?.detail === "✅ Task completed"
-        ? resp.data.detail
-        : "✅ Task completed";
-
-    return { result: msg, raw: resp.data };
+    const ok = resp.data?.detail === "✅ Task completed";
+    return {
+      result: ok ? resp.data.detail : "✅ Task completed",
+      raw: resp.data,
+    };
   } catch (err) {
     console.error("🔥 Python agent error:", err.response?.data || err.message);
     const detail = err.response?.data?.detail || err.message;

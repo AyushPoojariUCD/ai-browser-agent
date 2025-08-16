@@ -1,17 +1,30 @@
-// backend/llmAnswerAgent.js
-require("dotenv").config();
+// llmAnswerAgent.js
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 const { OpenAI } = require("openai");
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+// Single client instance
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+// Model for plain Q&A (no tools)
+const MODEL = process.env.OPENAI_MODEL || "gpt-4o-mini";
 
 /**
- * Answer a general question via OpenAI.
- * @param {string} question
- * @returns {Promise<string>}
+ * Answer general knowledge questions (no browsing/tools).
+ * Returns a plain string.
  */
-exports.answerWithLLM = async (question) => {
+exports.answerQuestion = async (question) => {
+  const sys = "You are a concise, helpful assistant. Keep answers direct.";
   const res = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: question }],
+    model: MODEL,
+    messages: [
+      { role: "system", content: sys },
+      { role: "user", content: question },
+    ],
+    temperature: 0.3,
   });
-  return res.choices[0].message.content.trim();
+
+  return res.choices?.[0]?.message?.content?.trim() || "I’m not sure.";
 };
