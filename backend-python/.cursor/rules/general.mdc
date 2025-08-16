@@ -1,0 +1,17 @@
+---
+description: "Contributing rules for backend"
+globs: ["**/*.py"]
+alwaysApply: true
+---
+
+## 🧠 Guidelines for Contributing to `backend`
+
+This backend powers the AI browser agent's automation system. It includes FastAPI endpoints and agent interaction.
+
+### 🗂️ File Documentation
+
+Each file should begin with:
+
+```python
+# @file purpose: <What this file does>
+```
