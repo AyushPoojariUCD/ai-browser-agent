@@ -1,12 +1,12 @@
 # AI Browser Agent
 
-A privacy-preserving AI assistant that automates tasks like ticket booking, form filling, and web scraping directly in your local browser using LLMs, Selenium and Electron.
+A privacy-preserving AI assistant that automates tasks like ticket booking, form filling, and web scraping directly in your local browser using LLMs, Browser-Use and Electron.
 
 ## Overview
 
 The AI Browser Agent is a locally run desktop application designed to help users automate complex web-based tasks through natural language commands. Unlike cloud-based assistants, it executes all actions directly on the user's device, ensuring that sensitive information such as passwords, personal data, and browsing activity never leave the local environment.
 
-By integrating large language models (LLMs) with browser automation frameworks like Selenium, the agent can understand user intents, analyze the content of multiple open browser tabs, and perform multi-step tasks autonomously. The use of Microsoft’s Semantic Kernel adds an extra layer of controlled, secure execution for each automation steps.
+By integrating large language models (LLMs) with browser automation frameworks like Browser-use, the agent can understand user intents, analyze the content of multiple open browser tabs, and perform multi-step tasks autonomously. The use of Microsoft’s Semantic Kernel adds an extra layer of controlled, secure execution for each automation steps.
 
 
 ## Features
@@ -14,10 +14,10 @@ By integrating large language models (LLMs) with browser automation frameworks l
 - Chat interface for conversational task instructions
 - End-to-end local execution; no data sent to cloud servers
 - Automated task execution across browser tabs
-- Browser content analysis using Puppeteer or Selenium
+- Browser content analysis using Playwright
 - Workflow planning using large language models (LLMs)
 - Semantic Kernel integration for structured and secure task execution
-- Built with React, Electron, Express, Firebase, and Selenium
+- Built with React, Electron, Express, Firebase, Python and Node
 
 ---
 
