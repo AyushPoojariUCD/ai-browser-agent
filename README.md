@@ -81,7 +81,7 @@ This use case showcases the AI’s capability in **e-commerce automation**, maki
 |----------------------|-------------------------------------------------|
 | UI                   | React, Electron, Tailwind CSS                   |
 | Backend              | Python, Express (Node.js), Firebase Admin SDK   |
-| Browser Automation   | Browser-Use(playwright)                         |
+| Browser Automation   | Browser-Use (playwright)                         |
 | Planning             | OpenAI GPT / Claude Anthorpic                   |
 
 ---
@@ -106,22 +106,33 @@ ai-browser-agent/
 │   └── siteHandlers
 │       ├── amazon.js
 │       └── tesco.js
-├── backend-python
-│   ├── __pycache__
-│   │   └── server.cpython-313.pyc
-│   ├── llm
-│   │   └── __pycache__
-│   │       ├── __init__.cpython-313.pyc
-│   │       ├── llm_automation.cpython-313.pyc
-│   │       └── llm_chat.cpython-313.pyc
-│   ├── schemas
-│   │   └── __pycache__
-│   │       ├── __init__.cpython-313.pyc
-│   │       └── chat.cpython-313.pyc
-│   └── utils
-│       └── __pycache__
-│           ├── __init__.cpython-313.pyc
-│           └── check_api_key.cpython-313.pyc
+│
+├── backend-python/ # Python backend for AI/LLM workflows
+│ ├── .cursor/rules/ # Cursor IDE rules & configurations
+│ │ └── general.mdc
+│ │
+│ ├── bin/ # Shell scripts for setup, linting, and tests
+│ │ ├── lint.sh
+│ │ ├── setup.sh
+│ │ └── test.sh
+│ │
+│ ├── llm/ # Core LLM-related modules
+│ │ ├── init.py
+│ │ ├── llm_automation.py # Automation workflows using LLMs
+│ │ └── llm_chat.py # Chat/interaction logic with LLMs
+│ │
+│ ├── schemas/ # (Future) Data validation schemas (e.g., Pydantic)
+│ │
+│ ├── utils/ # Utility/helper functions
+│ │ ├── init.py
+│ │ └── check_api_key.py # API key validation for external services
+│ │
+│ ├── .gitignore # Ignore files from version control
+│ ├── .python-version # Python version specification
+│ ├── pyproject.toml # Python dependencies & build configuration
+│ ├── README.md # Python backend documentation
+│ └── server.py # Main backend server entry point
+│
 ├── docs
 │   ├── llm-integration-decision.pdf
 │   ├── project-workflow.png
