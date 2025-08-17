@@ -17,8 +17,8 @@ const Sidebar = ({ closeSidebar }) => {
     newChat,
     renameChat,
     deleteChat,
-    modelType,
-    setModelType,
+    provider,
+    setProvider,
     temperature,
     setTemperature,
     automationEnabled,
@@ -27,6 +27,7 @@ const Sidebar = ({ closeSidebar }) => {
 
   const [editingIndex, setEditingIndex] = useState(null);
   const [tempTitle, setTempTitle] = useState("");
+
 
   return (
     <aside className="w-64 bg-[#1f1f3a] p-4 border-r border-gray-700 flex flex-col justify-between">
@@ -110,31 +111,23 @@ const Sidebar = ({ closeSidebar }) => {
           ))}
         </div>
 
-        {/* ⚙️ Model & automation settings */}
+        {/* ⚙️ LLM Provider */}
         <div className="pt-4 border-t border-gray-600 mt-4 space-y-2">
           <div>
             <label className="text-sm text-gray-300">LLM Provider</label>
             <select
-              value={modelType}
-              onChange={(e) => setModelType(e.target.value)}
+              value={provider}
+              onChange={(e) => setProvider(e.target.value)}
               className="w-full p-1 rounded bg-[#2b2b45] text-white text-sm"
             >
-              <option value="gpt-4o">GPT-4o (OpenAI)</option>
-              <option value="gpt-4">GPT-4 (OpenAI)</option>
-              <option value="gpt-3.5-turbo">GPT-3.5 Turbo (OpenAI)</option>
-              <option value="claude-3-sonnet-20240229">Claude 3 Sonnet</option>
-              <option value="claude-3-haiku-20240307">Claude 3 Haiku</option>
-              <option value="claude-3-opus-20240229">Claude 3 Opus</option>
-              <option value="mistral-small-latest">Mistral Small</option>
-              <option value="mistral-medium-latest">Mistral Medium</option>
-              <option value="mistral-large-latest">Mistral Large</option>
-              <option value="llama3-8b-8192">LLaMA 3 (8B)</option>
-              <option value="llama3-70b-8192">LLaMA 3 (70B)</option>
-              <option value="gemini-1.5-pro-latest">Gemini 1.5 Pro</option>
-              <option value="command-r">Command R</option>
-              <option value="command-r-plus">Command R+</option>
-              <option value="mixtral-8x7b-32768">Mixtral (Groq)</option>
-              <option value="perplexity">Perplexity</option>
+              <option value="openai">OpenAI</option>
+              <option value="google">Google</option>
+              <option value="groq">Groq</option>
+              <option value="deepseek">Deepseek</option>
+              <option value="ollama">Ollama</option>
+              <option value="aws">AWS</option>
+              <option value="azure">Azure</option>
+              <option value="anthropic">Anthropic</option>
             </select>
           </div>
 
