@@ -22,7 +22,7 @@ By integrating large language models (LLMs) with browser automation frameworks l
 ---
 ## 🎥 Demo Workflow Walkthorugh [AI Browser Agent]
 
-[![Watch the demo](docs/demo-thumbnail.png)](https://drive.google.com/file/d/1yoQ5OzgQZsDo3h1QZxA9OXHUbtXMRav1/view?usp=sharing)
+![Demo](demo/demo-workflow.gif)
 
 ## Example Use Case
 
