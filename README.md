@@ -1,3 +1,5 @@
+
+
 # AI Browser Agent
 
 A privacy-preserving AI assistant that automates tasks like ticket booking, form filling, and web scraping directly in your local browser using LLMs, Browser-Use and Electron.
@@ -252,7 +254,7 @@ ai-browser-agent/
  **Clone the Repository**
 
 ```bash
-git clone https://github.com/yourname/ai-browser-agent.git
+git clone https://github.com/AyushPoojariUCD/ai-browser-agent.git
 cd ai-browser-agent
 ```
 
@@ -303,4 +305,3 @@ node server.js
 - **Sudhanshu Ghuge**    
 - **Preet Raut** 
 - **Soham Deo**
-  
